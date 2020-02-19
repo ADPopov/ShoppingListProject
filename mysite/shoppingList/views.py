@@ -1,12 +1,13 @@
 from django.http import HttpResponse
-from django.http import JsonResponse
+from django.shortcuts import render
+
 from shoppingList.models import Product
 
 
 def index(request):
     products_list = Product.objects.all()
-    output = ", ".join([q.name for q in products_list])
-    return HttpResponse(output)
+    context = {'products_list': products_list}
+    return render(request, 'shoppingList/index.html', context)
 
 
 def add(request):
@@ -14,5 +15,5 @@ def add(request):
 
 
 def edit(request, question_id):
-    return HttpResponse("вы изменяете продукт с идентификатором %s" % question_id)
-# Create your views here.
+    product = Product.objects.filter(id=question_id).first()
+    return HttpResponse("вы изменяете продукт с названием %s" % product.name)

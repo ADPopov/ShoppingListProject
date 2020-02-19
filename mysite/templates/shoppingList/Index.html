@@ -1,0 +1,9 @@
+{% if products_list %}
+    <ul>
+    {% for q in products_list %}
+        <li><a href="/{{ q.id }}/edit/">{{ q.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет продуктов!</p>
+{% endif %}
