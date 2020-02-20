@@ -1,7 +1,8 @@
+<h1>Список продуктов</h1>
 {% if products_list %}
     <ul>
     {% for q in products_list %}
-        <li><a href="/{{ q.id }}/edit/">{{ q.name }}</a></li>
+        <li><a href="{% url 'shoppingList:edit' q.id %}">{{ q.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
