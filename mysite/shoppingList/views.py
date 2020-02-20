@@ -1,6 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
+from django.utils import timezone
+
 from shoppingList.models import Product
 
 
@@ -11,7 +13,20 @@ def index(request):
 
 
 def add(request):
-    return HttpResponse("Страница добавления нового продукта")
+    try:
+        if request.method == "POST":
+            product = Product(
+                name=request.POST.get("name"),
+                shopName=request.POST.get("shopName"),
+                purchase_date=timezone.now(),
+                cost=request.POST.get("cost"),
+                quantity=request.POST.get("quantity"))
+            product.save()
+            return HttpResponseRedirect("/")
+        else:
+            return render(request, "shoppingList/add.html")
+    except Product.DoesNotExist:
+        return HttpResponseNotFound("<h2>Product not found</h2>")
 
 
 def edit(request, id):
@@ -19,7 +34,7 @@ def edit(request, id):
     return render(request, 'shoppingList/edit.html', {'product': product})
 
 
-def vote(request, id):
+def change(request, id):
     try:
         product = Product.objects.get(id=id)
 
@@ -33,4 +48,4 @@ def vote(request, id):
         else:
             return render(request, "shoppingList/edit.html", {"product": product})
     except Product.DoesNotExist:
-        return HttpResponseNotFound("<h2>Person not found</h2>")
+        return HttpResponseNotFound("<h2>Product not found</h2>")

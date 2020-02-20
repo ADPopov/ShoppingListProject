@@ -1,0 +1,20 @@
+<form action="{% url 'shoppingList:add' %}" method="post">
+        {% csrf_token %}
+        <p>
+            <label>Название продута</label><br>
+            <input type="text" name="name" value="" />
+        </p>
+        <p>
+            <label>Магазин</label><br>
+            <input type="text" name="shopName" value="" />
+        </p>
+        <p>
+            <label>Стоимость</label><br>
+            <input type="number" name="cost" value="" />
+        </p>
+        <p>
+            <label>Количество</label><br>
+            <input type="number" name="quantity" value="" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>

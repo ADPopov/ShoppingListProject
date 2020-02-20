@@ -9,6 +9,3 @@ class Product(models.Model):
     cost = models.IntegerField(u'Стоимость', default=0)
     quantity = models.IntegerField(u'Количество', default=0)
 
-    def __str__(self):
-        return self.name
-

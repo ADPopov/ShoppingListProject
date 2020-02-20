@@ -1,6 +1,6 @@
 <p> Вы выбрали: {{ product.name }}</p>
 
-<form action="{% url 'shoppingList:vote' product.id %}" method="post">
+<form action="{% url 'shoppingList:change' product.id %}" method="post">
         {% csrf_token %}
         <p>
             <label>Название продута</label><br>
