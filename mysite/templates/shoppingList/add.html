@@ -1,20 +1,30 @@
 <form action="{% url 'shoppingList:add' %}" method="post">
-        {% csrf_token %}
-        <p>
-            <label>Название продута</label><br>
-            <input type="text" name="name" value="" />
-        </p>
-        <p>
-            <label>Магазин</label><br>
-            <input type="text" name="shopName" value="" />
-        </p>
-        <p>
-            <label>Стоимость</label><br>
-            <input type="number" name="cost" value="" />
-        </p>
-        <p>
-            <label>Количество</label><br>
-            <input type="number" name="quantity" value="" />
-        </p>
-        <input type="submit" value="Сохранить" >
-    </form>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.name.errors }}
+        <label for="{{ form.subject.id_for_label }}">Name</label>
+        {{ form.name }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.purchase_date.errors }}
+        <label for="{{ form.message.id_for_label }}">purchase_date</label>
+        {{ form.purchase_date }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.shopName.errors }}
+        <label for="{{ form.sender.id_for_label }}">shopName</label>
+        {{ form.shopName }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.cost.errors }}
+        <label for="{{ form.cc_myself.id_for_label }}">cost</label>
+        {{ form.cost }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.quantity.errors }}
+        <label for="{{ form.cc_myself.id_for_label }}">quantity</label>
+        {{ form.quantity }}
+    </div>
+    <input type="submit" value="Добавить">
+</form>
